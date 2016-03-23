@@ -1,4 +1,4 @@
-import {Page, NavController, Alert} from 'ionic-angular';
+import {Page, NavController} from 'ionic-angular';
 import { Http } from 'angular2/http';
 
 class PostModel {
@@ -12,42 +12,24 @@ class PostModel {
   templateUrl: 'build/pages/home/home.html'
 })
 export class HomePage {
-    url = "http://samplejsonapi.herokuapp.com/";
+    url = "http://jsonplaceholder.typicode.com/";
     
     list : Array<PostModel>;
-    
     
     constructor(public http : Http, public nav : NavController){
         
     }
     
-    
-    loader(a?){
-        let loader = a || Alert.create({
-            title: 'Loading...'
-        });
-        
-        return {
-            show : () => {
-                this.nav.present(loader);
-                return loader;
-            } 
-        }
-    }
-    
     makeHttpRequest(){
         
         console.log("Make Request");
-        var loader = this.loader().show();
-
+        
         this.http.request(this.url + "posts")
             .subscribe((res)=>{
                 console.log(res.json())
                 this.list = res.json();
-                loader.destroy();
             }, (err)=>{
                 console.log(err)
-                loader.destroy();
             })
     }
 }
