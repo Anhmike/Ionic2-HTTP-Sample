@@ -1,35 +1,33 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController, NavParams, Alert} from 'ionic-angular';
 import { Http } from 'angular2/http';
 
-class PostModel {
-    userId : number;
-    id : number;
-    title : string;
-    completed : boolean;
-}
 
 @Page({
-  templateUrl: 'build/pages/home/home.html'
+  templateUrl: 'build/pages/detail/detail.html'
 })
-export class HomePage {
-    url = "http://jsonplaceholder.typicode.com/";
+export class DetailPage {
+    url = "http://samplejsonapi.herokuapp.com/";
+    data;
+    list: Array<{}>;
+
+    constructor(public http : Http, public nav : NavController, public params: NavParams){
+        this.data = this.params.data; 
+    }
     
-    list : Array<PostModel>;
-    
-    constructor(public http : Http, public nav : NavController){
-        
+    ngOnInit(){
+        this.makeHttpRequest();
     }
     
     makeHttpRequest(){
         
-        console.log("Make Request");
+        console.log("Make Request");    
         
-        this.http.request(this.url + "posts")
+        this.http.request(this.url + "posts/" + this.data.id + "/comments" )
             .subscribe((res)=>{
-                console.log(res.json())
+                console.log(res.json())                
                 this.list = res.json();
             }, (err)=>{
-                console.log(err)
+                console.log(err);
             })
     }
 }

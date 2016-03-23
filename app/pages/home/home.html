@@ -9,7 +9,7 @@
   
   <ion-list>
     <ion-item *ngFor="#item of list">
-        <a><p>{{item.title}}</p></a>
+        <a (click)="gotoDetail(item)"><p>{{item.title}}</p></a>
     </ion-item>
   </ion-list>
   

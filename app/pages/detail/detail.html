@@ -1,15 +1,14 @@
 <ion-navbar *navbar>
   <ion-title>
-    Home
+    Detail
   </ion-title>
 </ion-navbar>
 
 <ion-content class="home">
-  <button full (click)="makeHttpRequest()">Get Posts via HTTP</button>
   
   <ion-list>
     <ion-item *ngFor="#item of list">
-        <a><p>{{item.title}}</p></a>
+        <p>{{item.name}}</p>
     </ion-item>
   </ion-list>
   

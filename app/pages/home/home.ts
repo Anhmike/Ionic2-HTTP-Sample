@@ -1,6 +1,8 @@
 import {Page, NavController, Alert} from 'ionic-angular';
 import { Http } from 'angular2/http';
 
+import { DetailPage } from '../detail/detail';
+
 class PostModel {
     userId : number;
     id : number;
@@ -13,17 +15,13 @@ class PostModel {
 })
 export class HomePage {
     url = "http://samplejsonapi.herokuapp.com/";
+    list : Array<PostModel>;    
     
-    list : Array<PostModel>;
-    
-    
-    constructor(public http : Http, public nav : NavController){
-        
+    constructor(public http : Http, public nav : NavController){  
     }
-    
-    
-    loader(a?){
-        let loader = a || Alert.create({
+        
+    loader(){
+        let loader = Alert.create({
             title: 'Loading...'
         });
         
@@ -38,7 +36,7 @@ export class HomePage {
     makeHttpRequest(){
         
         console.log("Make Request");
-        var loader = this.loader().show();
+        let loader = this.loader().show();
 
         this.http.request(this.url + "posts")
             .subscribe((res)=>{
@@ -49,6 +47,10 @@ export class HomePage {
                 console.log(err)
                 loader.destroy();
             })
+    }
+    
+    gotoDetail(item: PostModel){
+        this.nav.push(DetailPage, item);
     }
 }
 
