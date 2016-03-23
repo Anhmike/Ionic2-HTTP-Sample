@@ -5,12 +5,11 @@
 </ion-navbar>
 
 <ion-content class="home">
-  <button full (click)="makeHttpRequest()">HTTP Request</button>
+  <button full (click)="makeHttpRequest()">Get Posts via HTTP</button>
   
   <ion-list>
     <ion-item *ngFor="#item of list">
-        <h3>{{item.title}}</h3>
-        <h6>{{item.completed ? 'Complete' : 'Incomplete'}}</h6>
+        <a><p>{{item.title}}</p></a>
     </ion-item>
   </ion-list>
   
